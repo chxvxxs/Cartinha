@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Um aninho</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            transition: background-color 5s ease;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .heart {
+            background-color: #ff0000;
+            display: inline-block;
+            height: 50px; /* Reduced from 80px */
+            margin: 0 10px;
+            position: relative;
+            top: 0;
+            transform: rotate(-45deg);
+            width: 50px; /* Reduced from 80px */
+            cursor: pointer;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: "";
+            background-color: #ff0000;
+            border-radius: 50%;
+            height: 50px; /* Reduced from 80px */
+            position: absolute;
+            width: 50px; /* Reduced from 80px */
+        }
+
+        .heart:before {
+            top: -25px; /* Adjusted from -40px */
+            left: 0;
+        }
+
+        .heart:after {
+            left: 25px; /* Adjusted from 40px */
+            top: 0;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: rotate(-45deg) scale(1); }
+            25% { transform: rotate(-45deg) scale(1.1); }
+            50% { transform: rotate(-45deg) scale(1); }
+            75% { transform: rotate(-45deg) scale(1.2); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+        
+        .letter {
+            background-color: white;
+            width: 80%;
+            max-width: 500px;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            transform: translateY(-150vh);
+            transition: transform 5s ease;
+        }
+        
+        .letter.show {
+            transform: translateY(0);
+        }
+        
+        .bottom-heart {
+            position: absolute;
+            bottom: -25px; /* Adjusted from -40px */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .first-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            transition: opacity 2s ease;
+            z-index: 10;
+        }
+        
+        .second-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            z-index: 5;
+        }
+        
+        .hidden {
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="first-screen" id="firstScreen">
+        <h1 class="text-3xl font-bold mb-8 text-center">Click the heart!</h1>
+        <div class="heart" id="initialHeart"></div>
+    </div>
+    
+    <div class="second-screen" id="secondScreen">
+        <div class="letter" id="letter">
+            <h2 class="text-xl font-bold mb-4">Oi Momo,</h2>
+            <p class="mb-4">
+                Hoje é um dia muito especial pra gente, nosso primeiro aninho junto. 
+                Tu tem sido tudo pra mim, minha vida só é boa contigo,
+                tudo meu pertence a tu. Sei que as vezes eu não sou a melhor pessoa do mundo,
+                errei bastante contigo, me arrependo disso e tô fazendo o máximo pra mudar
+                por nós. Espero que tu nunca desista da gente, pq eu prometo que tudo vai valer a pena.
+            </p>
+            <p class="mb-6">
+                Sei que não tem sido fácil continuar, mas espero que tu não desista da gente. 
+                Eu tô disposto a fazer de tudo pelo nosso relacionamento, quero ter um lindo futuro ctg. 
+                Tu é tudo de bom pra mim e se o sagrado permitir vai ser a mãe dos meus filhos.
+                <br>
+                Feliz um ano amor da minha vida, espero que venham muito mais e que nosso relacionamento
+                se cure de tudo, pq eu quero ter uma vida linda e inteira ao teu lado.
+            </p>
+            <p class="text-right italic mt-8">De todo o meu coração,</p>
+            <p class="text-right font-bold">Momo</p>
+            
+            <div class="bottom-heart">
+                <div class="heart"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const initialHeart = document.getElementById('initialHeart');
+            const firstScreen = document.getElementById('firstScreen');
+            const secondScreen = document.getElementById('secondScreen');
+            const letter = document.getElementById('letter');
+            
+            initialHeart.addEventListener('click', function() {
+                // Change background color
+                document.body.style.backgroundColor = '#ffcce6';
+                
+                // Fade out first screen
+                firstScreen.style.opacity = '0';
+                firstScreen.classList.add('hidden');
+                
+                // Show letter sliding down
+                setTimeout(() => {
+                    letter.classList.add('show');
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
